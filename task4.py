@@ -43,14 +43,11 @@ def draw_tree(tree_root: Node) -> None:
     plt.show()
 
 
-if __name__ == "__main__":
-    # create heap
-    heap_arr: List[int] = [15, 8, 23, 4, 42, 16, 7, 31, 12, 35, 19, 27, 3, 11, 38, 9, 44, 21, 5, 33, 14, 29, 6, 40, 17, 25, 10, 36, 2, 13]
-    heapq.heapify(heap_arr)
-    
+def arr_to_heap_to_tree(arr: List[int]) -> Node:
+    heapq.heapify(arr)
     
     # build binary tree from heap
-    nodes = [Node(val) for val in heap_arr]
+    nodes = [Node(val) for val in arr]
     length = len(nodes)
 
     for i in range(length // 2):
@@ -58,9 +55,18 @@ if __name__ == "__main__":
             nodes[i].left = nodes[2 * i + 1]
         if 2 * i + 2 < length:
             nodes[i].right = nodes[2 * i + 2]
+
+    # return root node
+    return nodes[0]
+        
+
+if __name__ == "__main__":
+    # create heap
+    arr: List[int] = [15, 8, 23, 4, 42, 16, 7, 31, 12, 35, 19, 27, 3, 11, 38, 9, 44, 21, 5, 33, 14, 29, 6, 40, 17, 25, 10, 36, 2, 13]
+    root_node = arr_to_heap_to_tree(arr)
     
     # draw tree
-    draw_tree(nodes[0])
+    draw_tree(root_node)
     
     
     
